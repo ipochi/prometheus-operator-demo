@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: sock-shop-shipping
+  labels:
+    team: shipping
+  namespace: sock-shop
+spec:
+  jobLabel: shipping-metrics
+  selector:
+    matchLabels:
+      name: shipping
+  namespaceSelector:
+    matchNames:
+    - sock-shop
+  endpoints:
+  - targetPort: 80
+    path: /metrics

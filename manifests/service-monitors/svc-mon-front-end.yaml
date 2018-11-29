@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: sock-shop-front-end
+  labels:
+    team: front-end
+  namespace: sock-shop
+spec:
+  jobLabel: front-end-metrics
+  selector:
+    matchLabels:
+      name: front-end
+  namespaceSelector:
+    matchNames:
+    - sock-shop
+  endpoints:
+  - targetPort: 8079
+    path: /metrics
